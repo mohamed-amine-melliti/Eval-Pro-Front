@@ -29,7 +29,7 @@ function selectEmployee(employee: Employee) {
 
 
 // Employee Schema
-import EmployeeSchema from '~/yup-schemas/employee-schema';
+import EmployeeSchema from '~/zod-schemas/employee-schema';
 
 import { Employee } from '~/entities/Employee';
 

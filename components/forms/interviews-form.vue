@@ -16,7 +16,7 @@
 
 <script>
 import { Qalendar } from "qalendar";
-
+ 
 export default {
   components: { 
     Qalendar,

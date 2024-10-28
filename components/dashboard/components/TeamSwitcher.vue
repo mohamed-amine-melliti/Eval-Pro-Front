@@ -37,7 +37,7 @@ import {
 
 const groups = [
   {
-    label: 'Personal Account',
+    label: 'Current Deparement',
     teams: [
       {
         label: 'Departement HR',

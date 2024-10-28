@@ -13,7 +13,7 @@ type Group = {
 
 const initialGroups: Group[] = [
   {
-    label: 'Personal Account',
+    label: '',
     teams: [
       {
         label: 'HR departement',
