@@ -1,7 +1,6 @@
 import { defineStore } from 'pinia';
 import Task from '@/entities/Task';
-import TaskSchema from '@/schemas/TaskSchema';
-
+import TaskSchema from '~/zod-schemas/task-schema';
 
 let taskCounter = 0; // Counter to increment task IDs
 function generateIncrementalId(): string {
@@ -19,7 +18,7 @@ export const useTaskStore = defineStore('taskStore', {
       new Task(4, 'Backlog', 'Medium', 'Feature', 'The SAS interface is down, bypass the open-source project so we can bac...'),
       new Task(5, 'Canceled', 'Medium', 'Feature', "I'll parse the wireless SSL protocol, that should drive the API panel!"),
       new Task(6, 'Done', 'High', 'Bug', 'Use the digital TLS panel, then you can transmit the haptic system!'),
-      new Task(7, 'Todo', 'High', 'Feature', 'The UTF8 application is down, parse the neural back-end so we can ba...'),
+      new Task(7, 'Todo', 'High', ' ', 'The UTF8 application is down, parse the neural back-end so we can ba...'),
       new Task(8, 'In Progress', 'Medium', 'Feature', "Generating the driver won't do anything; we need to copy the 1080p ..."),
       new Task(9, 'Todo', 'Low', 'Feature', 'We need to program the back-end THX pixel!')
     ]

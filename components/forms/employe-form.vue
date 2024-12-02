@@ -2,38 +2,19 @@
 import { useField, useForm } from 'vee-validate';
 import { InferType } from 'yup';
 import { ref } from 'vue'
-
-const containerRef = ref<HTMLDivElement>()
-const div1Ref = ref()
-const div2Ref = ref()
-const div3Ref = ref()
-const div4Ref = ref()
-const div5Ref = ref()
-const div6Ref = ref()
-const div7Ref = ref()
 import { toRaw } from 'vue'
 // Declare a boolean ref to track card visibility
 const isCardVisible = ref(false)
-
-// Function to toggle the card visibility
-
 // This will store the currently selected employee's details
 const selectedEmployee = ref<Employee | null>(null); // Allow null if no employee is selected
-
 // Function to handle selecting an employee
 function selectEmployee(employee: Employee) {
   isCardVisible.value = !isCardVisible.value
-
   selectedEmployee.value = employee;
 }
-
-
 // Employee Schema
 import EmployeeSchema from '~/zod-schemas/employee-schema';
-
-import { Employee } from '~/entities/Employee';
-
-
+import { Employee } from '~/entities/Employee'
 import {
   Table,
   TableBody,
@@ -42,15 +23,12 @@ import {
   TableHeader,
   TableRow,
 } from '~/lib/registry/new-york/ui/table';
-
 import {
   Tabs,
   TabsContent,
   TabsList,
   TabsTrigger,
 } from '~/lib/registry/new-york/ui/tabs';
-
-
 import {
   Checkbox,
 } from '~/lib/registry/new-york/ui/checkbox';
@@ -63,9 +41,7 @@ import { Input } from '~/lib/registry/new-york/ui/input';
 import { Sheet, SheetContent, SheetTrigger } from '~/lib/registry/new-york/ui/sheet';
 // Icons
 import {
-  CircleUser,
   Copy,
-  CreditCard,
   File,
   Home,
   LineChart,
@@ -74,8 +50,6 @@ import {
   Package,
   Package2,
   PanelLeft,
-  Search,
-  Settings,
   ShoppingCart,
   Truck,
   Users2,

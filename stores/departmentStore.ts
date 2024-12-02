@@ -13,18 +13,19 @@ type Department = {
   teams: Team[]
 }
 
+
 export const useDepartmentStore = defineStore('department', {
   state: () => ({
     departments: [
       {
         id: 1,
-        label: 'Main Account',
+        label: 'Current Department',
         teams: [
           {
             id: 1,
             name: 'Department HR',
-            value: 'personal',
-            manager: 101, // manager employee_id
+            value: 'hr',
+            manager: 101, // manager's employee_id
           },
         ],
       },
@@ -34,15 +35,15 @@ export const useDepartmentStore = defineStore('department', {
         teams: [
           {
             id: 2,
-            name: 'Acme Inc.',
-            value: 'acme-inc',
-            manager: 102,
+            name: 'Department Financier',
+            value: 'financier',
+            manager: 102, // manager's employee_id
           },
           {
             id: 3,
-            name: 'Monsters Inc.',
-            value: 'monsters',
-            manager: 103,
+            name: 'Department Development',
+            value: 'dev',
+            manager: 103, // manager's employee_id
           },
         ],
       },

@@ -1,13 +1,24 @@
 <script setup lang="ts">
 import tasks from "./tasks/data/tasks.json"
 import DataTable from "./tasks/components/DataTable.vue";
-import UserNav from "./tasks/components/UserNav.vue";
 import { columns } from './tasks/components/columns'
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '~/lib/registry/new-york/ui/card';
 import { Button } from '~/lib/registry/default/ui/button';
 import { Progress } from '~/lib/registry/new-york/ui/progress';
 import AutoForm from "~/lib/registry/default/ui/auto-form/AutoForm.vue";
 import TaskSchema from "~/zod-schemas/task-schema";
+import { useTaskStore } from '~/stores/taskStore';
+
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from '~/lib/registry/default/ui/dialog'
+
 const form = ref({
   employeeID: null,
   status: 'Todo',
@@ -16,20 +27,71 @@ const form = ref({
   title: ''
 });
 
-const handleSubmit = () => {
-      try {
-        // Validate form data against TaskSchema
-        TaskSchema.parse(form.value);
 
-        // If validation passes, proceed with task creation logic
-        // This could include adding the task to a store or making an API request
-        console.log('Task created successfully:', form.value);
-        errorMessage.value = '';
-      } catch (error) {
-        // If validation fails, set an error message
-        errorMessage.value = error.errors?.[0]?.message || 'Validation error';
-      }
-    };
+const showMessage = () => {
+  useToast().toast({
+    title: "Success",
+    description: "Task created successfully!",
+    icon: "lucide:badge-check",
+  });
+};
+
+const taskStore = useTaskStore();
+
+
+async function handleSubmit(formData: typeof form.value) {
+  //isSubmitting.value = true; // Set submitting state to true
+
+  formData = toRaw(form.value)
+  try {
+
+
+    // Create a new employee instance
+    const newTask = new Task(
+      taskStore.generateId(),
+      formData.employeeID,
+      formData.priority,
+      formData.status,
+      formData.type,
+      formData.title,
+      formData.password,
+     
+      formData.active
+    )
+
+    // Log the new employee details to the console before adding
+    console.log('New Employee to be added:', toRaw(form.value));
+
+
+
+    // Add new employee to the store
+    await employeeStore.addEmployee(newEmployee)
+
+    showMessage(); // Show success toast after submission
+    // Display success notification
+
+
+    // Reset the form fields
+    // Object.assign(form.value, {
+    //   firstName: '',
+    //   jobposition: '',
+    //   username: '',
+    //   email: '',
+    //   address: '',
+    //   password: '',
+    //   dateOfBirth: new Date(),
+    //   startDate: new Date(),
+    //   active: false,
+    // })
+
+  } catch (error) {
+    console.error('Error adding employee:', error)
+    // Optionally, show an error notification here
+  } finally {
+    isSubmitting.value = false; // Reset submitting state
+  }
+}
+
 </script>
 
 <template>
@@ -44,29 +106,36 @@ const handleSubmit = () => {
     <div class="grid gap-4 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-2 xl:grid-cols-4">
       <Card class="sm:col-span-2">
         <CardHeader class="pb-3">
-          <CardTitle>Your Goals</CardTitle>
+          <CardTitle>Your Tasks</CardTitle>
           <CardDescription class="max-w-lg text-balance leading-relaxed">
-            Your Goals
+            Your Tasks
           </CardDescription>
         </CardHeader>
         <CardFooter>
 
-          <UiPopover>
+          <Dialog>
 
-            <UiPopoverTrigger as-child>
-              <Button>Create New Goal</Button>
-            </UiPopoverTrigger>
+            <DialogTrigger   as-child>
+              <Button>Create New Tasks</Button>
+            </DialogTrigger >
 
-            <UiPopoverContent class="w-80 p-6">
+            <DialogContent  class="w-80 p-6">
               <form>
                 <div class="flex h-full flex-col gap-1.5">
 
-                  <AutoForm  :schema="TaskSchema" />
+                  <AutoForm :schema="TaskSchema" :submit-handler="handleSubmit" @submit="(data) => {
+                    // Do something with the data
+                  }">
+
+                    <Button  @click="handleSubmit" type="submit">
+                      Submit
+                    </Button>
+                  </AutoForm>
 
                 </div>
               </form>
-            </UiPopoverContent>
-          </UiPopover>
+            </DialogContent >
+          </Dialog>
         </CardFooter>
       </Card>
 

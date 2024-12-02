@@ -23,6 +23,7 @@ import MlForm from '~/components/forms/ml-form.vue'
 import TeamsForm from '~/components/forms/teams-form.vue'
 import InterviewsForm from '~/components/forms/interviews-form.vue'
 import RapportForm from '~/components/forms/rapport-form.vue'
+import TasksForm from '~/components/forms/tasks-form.vue'
 </script>
 
 <template>
@@ -54,12 +55,16 @@ import RapportForm from '~/components/forms/rapport-form.vue'
             </div>
             <Tabs default-value="overview" class="space-y-4">
                 <TabsList>
+                    
                     <TabsTrigger value="overview">
                         Overview
                     </TabsTrigger>
+
+
                     <TabsTrigger value="employees">
                         Employees
                     </TabsTrigger>
+
                     <TabsTrigger value="teams">
                         Teams
                     </TabsTrigger>
@@ -67,14 +72,13 @@ import RapportForm from '~/components/forms/rapport-form.vue'
                         Rapports
                     </TabsTrigger>
 
-                    <TabsTrigger value="goals">
-                        Goals
+                    <TabsTrigger value="tasks">
+                        Tasks
                     </TabsTrigger>
 
                     <TabsTrigger value="interviews">
                         Interviews
                     </TabsTrigger>
-
 
                     <TabsTrigger value="evaluations">
                         Evaluations
@@ -210,9 +214,9 @@ import RapportForm from '~/components/forms/rapport-form.vue'
                 <TabsContent value="teams" class="space-y-4">
                     <FormsTeamsForm></FormsTeamsForm>
                 </TabsContent>
-                <!-----------------Goals Tab------------------------------------->
-                <TabsContent value="goals" class="space-y-4">
-                    <FormsGoalsForm></FormsGoalsForm>
+                <!-----------------Tasks Tab------------------------------------->
+                <TabsContent value="tasks" class="space-y-4">
+                    <FormsTasksForm></FormsTasksForm>
                 </TabsContent>
                 <!-----------------AI Tab------------------------------------->
                 <TabsContent value="ml-ai" class="space-y-4">
