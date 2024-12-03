@@ -101,7 +101,7 @@ async function onSubmit(formData) {
 
     Object.assign(form.value, {
       firstName: '',
-      jobposition: '',
+      jobPosition: '',
       username: '',
       email: '',
       address: '',

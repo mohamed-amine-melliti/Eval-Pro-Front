@@ -12,7 +12,9 @@ export default defineNuxtConfig({
     "@vee-validate/nuxt",
     "@morev/vue-transitions/nuxt",
     "@pinia/nuxt",
-    "@vueuse/motion/nuxt"
+    "@vueuse/motion/nuxt",
+    'pinia-plugin-persistedstate/nuxt',
+
   ],
 
 

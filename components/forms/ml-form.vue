@@ -9,6 +9,7 @@ import { Label } from '@/lib/registry/new-york/ui/label'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/lib/registry/new-york/ui/select'
 import { Textarea } from '@/lib/registry/new-york/ui/textarea'
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/lib/registry/new-york/ui/tooltip'
+import { query } from '../../utils/inference-type'
 
 
 import { ref } from 'vue';

@@ -133,18 +133,17 @@ async function onSubmit(formData: typeof form.value) {
     // Display success notification
 
 
-    // Reset the form fields
-    // Object.assign(form.value, {
-    //   firstName: '',
-    //   jobposition: '',
-    //   username: '',
-    //   email: '',
-    //   address: '',
-    //   password: '',
-    //   dateOfBirth: new Date(),
-    //   startDate: new Date(),
-    //   active: false,
-    // })
+    Object.assign(form.value, {
+      firstName: '',
+      jobPosition: '',
+      username: '',
+      email: '',
+      address: '',
+      password: '',
+      dateOfBirth: new Date(),
+      startDate: new Date(),
+      active: false,
+    })
 
   } catch (error) {
     console.error('Error adding employee:', error)

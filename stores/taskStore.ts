@@ -30,7 +30,7 @@ export const useTaskStore = defineStore('taskStore', {
     addTask(employeeID: number, status: string, priority: string, type: string, title: string) {
       // Validate the new task data before creating a Task instance
       const taskData = {
-        id: `TASK-${generateIncrementalId()}`,
+        id: `TASK-${S()}`,
         employeeID,
         status,
         priority,
