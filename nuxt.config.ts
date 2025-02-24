@@ -14,10 +14,7 @@ export default defineNuxtConfig({
     "@pinia/nuxt",
     "@vueuse/motion/nuxt",
     'pinia-plugin-persistedstate/nuxt',
-
   ],
-
-
 
   tailwindcss: {
     exposeConfig: true,

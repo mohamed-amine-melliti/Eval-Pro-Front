@@ -17,12 +17,25 @@ import {
 } from 'lucide-vue-next'
 
 
+
+import { ref, watch } from 'vue'
+import { ComboboxAnchor, ComboboxContent, ComboboxEmpty, ComboboxGroup, ComboboxInput, ComboboxItem, ComboboxItemIndicator, ComboboxLabel, ComboboxRoot, ComboboxTrigger, ComboboxViewport, TagsInputRoot } from 'radix-vue'
+import { Icon } from '@iconify/vue'
+
 import { Badge } from '~/lib/registry/new-york/ui/badge';
 import { Button } from '~/lib/registry/default/ui/button';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '~/lib/registry/new-york/ui/card';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from '~/lib/registry/new-york/ui/dropdown-menu';
 import { Sheet, SheetContent, SheetTrigger } from '~/lib/registry/new-york/ui/sheet';
-
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from '~/lib/registry/new-york/ui/dialog';
 
 
 import {
@@ -50,7 +63,14 @@ import {
 } from '~/lib/registry/new-york/ui/select';
 
 
-import { TagsInput, TagsInputInput, TagsInputItem, TagsInputItemDelete, TagsInputItemText } from   '~/lib/registry/new-york/ui/tags-input';
+import { TagsInput, TagsInputInput, TagsInputItem, TagsInputItemDelete, TagsInputItemText } from '~/lib/registry/new-york/ui/tags-input';
+const modelValue = ref(['Apple', 'Banana'])
+// Define reactive variables for form fields
+const teamName = ref('');
+const selectedManager = ref('');
+const teamMembers = ref([]);
+const isActive = ref('');
+
 </script>
 
 <template>
@@ -148,82 +168,68 @@ import { TagsInput, TagsInputInput, TagsInputItem, TagsInputItemDelete, TagsInpu
 
               <!-------------------------------Add Team-------------------------------->
 
-              <UiPopover>
-                <UiPopoverTrigger as-child>
-
+              <Dialog>
+                <DialogTrigger>
                   <Button size="sm" class="h-7 gap-1">
                     <PlusCircle class="h-3.5 w-3.5" />
-                    <span class="sr-only sm:not-sr-only sm:whitespace-nowrap">
-                      Add Team
-                    </span>
+                    <span class="sr-only sm:not-sr-only sm:whitespace-nowrap">Add Team</span>
                   </Button>
-                </UiPopoverTrigger>
-                <UiPopoverContent class="w-80 p-6">
+                </DialogTrigger>
 
+                <DialogContent class="w-80 p-6">
                   <form>
-                    <div class="flex h-full flex-col gap-1.5">
+                    <div class="flex flex-col gap-1.5">
                       <p class="font-semibold leading-none">New Team</p>
-                      <p class="text-sm text-muted-foreground">Set the informations.</p>
+                      <p class="text-sm text-muted-foreground">Set the information.</p>
+
                       <div class="mt-5 grid gap-3">
+                        <!-- Name Input -->
                         <div class="grid grid-cols-3 items-center gap-4">
-                          <UiLabel for="width">Name</UiLabel>
-                          <UiInput id="width" type="text" value="100%" class="col-span-2 h-8" />
+                          <UiLabel for="team-name">Name</UiLabel>
+                          <UiInput id="team-name" type="text" v-model="teamName" class="col-span-2 h-8" />
                         </div>
+
+                        <!-- Manager Select -->
                         <div class="grid grid-cols-3 items-center gap-4">
-                          <UiLabel for="maxWidth">Manager</UiLabel>
-                          <Select>
+                          <UiLabel for="manager">Manager</UiLabel>
+                          <Select v-model="selectedManager">
                             <SelectTrigger class="w-[180px]">
-                              <SelectValue placeholder="Select a fruit" />
+                              <SelectValue placeholder="Select a manager" />
                             </SelectTrigger>
                             <SelectContent>
                               <SelectGroup>
-                                <SelectLabel>Fruits</SelectLabel>
-                                <SelectItem value="apple">
-                                  Apple
-                                </SelectItem>
-                                <SelectItem value="banana">
-                                  Banana
-                                </SelectItem>
-                                <SelectItem value="blueberry">
-                                  Blueberry
-                                </SelectItem>
-                                <SelectItem value="grapes">
-                                  Grapes
-                                </SelectItem>
-                                <SelectItem value="pineapple">
-                                  Pineapple
-                                </SelectItem>
+                                <SelectLabel>Managers</SelectLabel>
+                                <SelectItem value="alice">Alice</SelectItem>
+                                <SelectItem value="bob">Bob</SelectItem>
+                                <SelectItem value="charlie">Charlie</SelectItem>
                               </SelectGroup>
                             </SelectContent>
                           </Select>
                         </div>
-                        <div class="grid grid-cols-1 items-center ">
 
-                          <UiLabel for="height">Members</UiLabel>
-
-                          <FormField v-slot="{ value }" name="fruits">
-                          <TagsInput :model-value="value">
-                            <TagsInputItem v-for="item in value" :key="item" :value="item">
+                        <!-- Tags Input -->
+                        <div class="grid grid-cols-2 items-center gap-0">
+                          <UiLabel for="members">Members</UiLabel>
+                          <TagsInput v-model="modelValue">
+                            <TagsInputItem v-for="item in modelValue" :key="item" :value="item">
                               <TagsInputItemText />
                               <TagsInputItemDelete />
                             </TagsInputItem>
-
                             <TagsInputInput placeholder="Fruits..." />
                           </TagsInput>
-                          </FormField>
                         </div>
 
-
+                        <!-- Active Input -->
                         <div class="grid grid-cols-3 items-center gap-4">
-                          <UiLabel for="maxHeight">Active</UiLabel>
-                          <UiInput id="maxHeight" type="text" value="none" class="col-span-2 h-8" />
+                          <UiLabel for="active-status">Active</UiLabel>
+                          <UiInput id="active-status" type="text" v-model="isActive" class="col-span-2 h-8" />
                         </div>
 
                       </div>
                     </div>
                   </form>
-                </UiPopoverContent>
-              </UiPopover>
+                </DialogContent>
+              </Dialog>
 
               <!-------------------------------------------------------------------->
 
@@ -300,3 +306,117 @@ import { TagsInput, TagsInputInput, TagsInputItem, TagsInputItemDelete, TagsInpu
     </div>
   </div>
 </template>
+
+<style scoped>
+/* Global Form Styles */
+.form {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: black;
+  border: 1px solid #eaeaea;
+  border-radius: 8px;
+}
+
+.form-section {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.form-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #333;
+}
+
+.form-description {
+  font-size: 0.875rem;
+  color: #666;
+}
+
+.form-fields {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* Form Groups */
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+/* Labels */
+.form-label {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: white
+}
+
+/* Inputs and Selects */
+.form-control {
+  width: 100%;
+  padding: 10px 12px;
+  font-size: 0.875rem;
+  color: #333;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  background-color: #fff;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.form-control:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.2);
+  outline: none;
+}
+
+.form-control:hover {
+  border-color: #bbb;
+}
+
+/* Tags Input */
+.tags-input {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+
+.tags {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.tag {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 8px;
+  font-size: 0.875rem;
+  color: #fff;
+  background-color: #007bff;
+  border-radius: 4px;
+}
+
+.tag-remove {
+  margin-left: 4px;
+  font-size: 1rem;
+  color: #fff;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.tag-remove:hover {
+  color: #ff4d4f;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .form {
+    padding: 16px;
+  }
+}
+</style>

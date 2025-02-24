@@ -14,7 +14,7 @@ const goToSignIn = () => {
 
     <UiContainer class="flex flex-col gap-y-5 py-10 md:flex-row md:gap-10 md:py-0 lg:h-[720px]">
 
-        <div class="flex items-center justify-center min-h-screen">
+        <!-- <div class="flex items-center justify-center min-h-screen">
             <div
                 class="relative mx-auto flex h-full w-full max-w-[32rem] items-center justify-center overflow-hidden rounded-lg border bg-background p-20 md:shadow-xl">
                 <span
@@ -23,9 +23,9 @@ const goToSignIn = () => {
                 </span>
                 <RetroGrid />
             </div>
-        </div>
+        </div> -->
 
-        <div class="flex h-full items-center justify-center md:w-2/3 xl:w-1/2">
+        <!-- <div class="flex h-full items-center justify-center md:w-2/3 xl:w-1/2">
             <div class="text-center md:text-left">
 
                 <div class="mt-8 grid grid-cols-1 gap-3 md:flex lg:mt-12">
@@ -35,8 +35,10 @@ const goToSignIn = () => {
                 </div>
 
             </div>
-        </div>
+        </div> -->
 
+
+        <Dashboard/>
     </UiContainer>
 
 
